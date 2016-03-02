@@ -1,0 +1,29 @@
+{
+  "name": "Codify",
+  "version": "1.0.0",
+  "description": "== README",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "postinstall": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-react": "^6.3.13",
+    "history": "^1.17.0",
+    "jquery-serializejson": "^2.6.2",
+    "moment": "^2.11.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.6",
+    "react-redux": "^4.4.0",
+    "react-router": "^1.0.3",
+    "redux": "^3.3.1",
+    "webpack": "^1.12.12"
+  }
+}
