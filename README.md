@@ -1,4 +1,4 @@
-== Codify
+# Codify
 
 This project will hopefully be *the* todo app/project manager/resource aggregator for programmers (and other areas too!).
 
