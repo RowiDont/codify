@@ -37,6 +37,8 @@ gem 'pg_search'
 
 
 group :development, :test do
+  gem 'capybara'
+  gem 'rspec-rails'
   gem 'byebug'
 end
 
