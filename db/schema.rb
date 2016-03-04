@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303020514) do
+ActiveRecord::Schema.define(version: 20160304012426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "user_id",    null: false
+  end
+
+  add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
+
+  create_table "categories_resources", force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "resource_id", null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "title",       null: false
@@ -25,6 +39,13 @@ ActiveRecord::Schema.define(version: 20160303020514) do
   end
 
   add_index "projects", ["title", "user_id"], name: "index_projects_on_title_and_user_id", unique: true, using: :btree
+
+  create_table "resources", force: :cascade do |t|
+    t.text     "link",        null: false
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",      null: false
