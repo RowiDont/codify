@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304012426) do
+ActiveRecord::Schema.define(version: 20160304023305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,10 @@ ActiveRecord::Schema.define(version: 20160304012426) do
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
 
   create_table "categories_resources", force: :cascade do |t|
-    t.integer "category_id", null: false
-    t.integer "resource_id", null: false
+    t.integer  "category_id", null: false
+    t.integer  "resource_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -43,6 +45,13 @@ ActiveRecord::Schema.define(version: 20160304012426) do
   create_table "resources", force: :cascade do |t|
     t.text     "link",        null: false
     t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "resources_users", force: :cascade do |t|
+    t.integer  "user_id",     null: false
+    t.integer  "resource_id", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
