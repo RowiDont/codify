@@ -1,9 +1,20 @@
 require 'rails_helper'
+require 'database_cleaner'
+
+DatabaseCleaner.strategy = :truncation
 
 RSpec.describe User, type: :model do
+  before(:each) { DatabaseCleaner.clean }
+  after(:each) { DatabaseCleaner.clean }
+
   it { should allow_value('rafiepatel@gmail.com').for(:email) }
   it { should_not allow_value('rafi').for(:email) }
   it { should validate_presence_of(:email) }
+  it "should validate uniqueness of email" do
+    u1 = User.create!(email: "originalDude@netscape.net")
+
+    expect { User.create!(email: "originalDude@netscape.net") }.to raise_exception
+  end
 
   it { should have_many(:categories) }
   it { should have_many(:projects) }

@@ -10,6 +10,13 @@ class Category < ActiveRecord::Base
     foreign_key: :category_id,
     primary_key: :id
   )
-
   has_many :resources, through: :resource_tags
+
+  has_many(
+    :project_tags,
+    class_name: "CategoryProject",
+    foreign_key: :category_id,
+    primary_key: :id
+  )
+  has_many :projects, through: :project_tags
 end

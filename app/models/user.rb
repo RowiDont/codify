@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   validates :email, presence: true
+  validates_uniqueness_of :email
   validate :is_email?
 
   has_many :projects

@@ -41,6 +41,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'byebug'
   gem 'shoulda-matchers'
+  gem 'json_spec', '~> 1.1', '>= 1.1.4'
+  gem 'api_matchers'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
 end
 
 group :development do
