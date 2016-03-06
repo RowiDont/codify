@@ -1,7 +1,12 @@
 require 'rails_helper'
+require 'database_cleaner'
+
+DatabaseCleaner.strategy = :truncation
 
 RSpec.describe Category, type: :model do
+
   before(:each) { User.create!(email: "rafiepatel@gmail.com") }
+  after(:each) { DatabaseCleaner.clean }
 
   it { should belong_to(:user) }
   it { should validate_presence_of(:user) }

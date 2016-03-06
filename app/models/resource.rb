@@ -17,4 +17,12 @@ class Resource < ActiveRecord::Base
     primary_key: :id
   )
   has_many :users, through: :user_tags
+
+  has_many(
+    :project_tags,
+    class_name: "ProjectResource",
+    foreign_key: :resource_id,
+    primary_key: :id
+  )
+  has_many :projects, through: :project_tags
 end

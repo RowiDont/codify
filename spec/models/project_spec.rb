@@ -11,6 +11,8 @@ RSpec.describe Project, type: :model do
   it { should validate_presence_of(:user_id) }
   it { should belong_to(:user) }
 
+  it { should have_many(:resources) }
+
   it { should have_many(:categories) }
   it "can access categories" do
     user = User.create!(email: "example@ex.com")

@@ -6,6 +6,8 @@ RSpec.describe Resource, type: :model do
 
   it { should have_many(:category_tags) }
   it { should have_many(:categories) }
+  
+  it { should have_many(:projects) }
 
   it { should have_many(:users) }
 
