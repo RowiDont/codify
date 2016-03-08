@@ -11,6 +11,13 @@ class Api::ResourcesController < ApplicationController
     @resource = current_user.resources.new(resource_params)
 
     if @resource.save
+      if params[:project]
+        ProjectResource.create({
+          resource_id: @resource.id,
+          project_id: params[:project][:id]
+        }) if params[:project][:id]
+      end
+
       render :show
     else
       render json: @resource.errors, status: 422

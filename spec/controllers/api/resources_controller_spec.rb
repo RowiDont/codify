@@ -63,7 +63,7 @@ RSpec.describe Api::ResourcesController, type: :controller do
 
       get :create, resource: { "link" => "google.io" }, project: { id: project1.id }, format: :json
 
-      expect(JSON.parse(response.body)["projects"]).to include(project1)
+      expect(JSON.parse(response.body)["projects"][0]["id"]).to eq(project1.id)
     end
   end
 end
