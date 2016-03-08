@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
-  def self.random_av
+  def self.rails_env
+    Rails.env == "production" ? "pro" : "dev"
+  end
+
+  def self.random_avatar
     rand(12) + 1
   end
 
@@ -9,7 +13,7 @@ class User < ActiveRecord::Base
                       medium: "300x300>",
                       thumb: "100x100>"
                     },
-                    default_url: ActionController::Base.helpers.image_url("/default_avatars/retro-seamless-patterns-#{User.random_av}.png")
+                    default_url: "https://s3.amazonaws.com/codify-#{User.rails_env}/default-avatars/retro-seamless-patterns-#{User.random_avatar}.png"
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   validates :email, presence: true
