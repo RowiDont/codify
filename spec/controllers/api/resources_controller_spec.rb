@@ -45,14 +45,14 @@ RSpec.describe Api::ResourcesController, type: :controller do
 
   context "#create" do
     it "should render relevant error messages for empty link" do
-      get :create, resource: { "link" => "" }, format: :json
+      post :create, resource: { "link" => "" }, format: :json
 
       expect(JSON.parse(response.body)["link"]).to eq(["can't be blank"])
       expect(response.status).to eq(422)
     end
 
     it "should render the show view on success" do
-      get :create, resource: { "link" => "google.io" }, format: :json
+      post :create, resource: { "link" => "google.io" }, format: :json
 
       expect(JSON.parse(response.body)["link"]).to eq("google.io")
     end
@@ -61,7 +61,7 @@ RSpec.describe Api::ResourcesController, type: :controller do
       user = User.first
       project1 = Project.create!(title: "a project!", user_id: user.id)
 
-      get :create, resource: { "link" => "google.io" }, project: { id: project1.id }, format: :json
+      post :create, resource: { "link" => "google.io" }, project: { id: project1.id }, format: :json
 
       expect(JSON.parse(response.body)["projects"][0]["id"]).to eq(project1.id)
     end
