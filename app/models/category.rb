@@ -10,7 +10,7 @@ class Category < ActiveRecord::Base
     foreign_key: :category_id,
     primary_key: :id
   )
-  
+
   has_many :resources, through: :resource_tags
 
   has_many(
