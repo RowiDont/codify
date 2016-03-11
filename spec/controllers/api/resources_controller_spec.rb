@@ -41,6 +41,12 @@ RSpec.describe Api::ResourcesController, type: :controller do
       expect(response.body).to have_node(:categories)
       expect(response.body).to have_node(:projects)
     end
+
+    it "should render an error if id does not exist" do
+      get :show, id: 5, format: :json
+      expect(JSON.parse(response.body)["errors"]).to include("does not exist")
+      expect(response.status).to eq(404)
+    end
   end
 
   context "#create" do

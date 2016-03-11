@@ -7,8 +7,12 @@ class Api::CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.includes(:resources, :projects).find(params[:id])
-    render :show
+    @category = Category.includes(:resources, :projects).find_by_id(params[:id])
+    if @category
+      render :show
+    else
+      render json: { errors: ["does not exist"] }, status: 404
+    end
   end
 
   def create

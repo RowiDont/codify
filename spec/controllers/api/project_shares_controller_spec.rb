@@ -38,7 +38,7 @@ RSpec.describe Api::ProjectSharesController, type: :controller do
       expect(response.status).to eq(422)
     end
 
-    it "should render errors when sharing with the nonexistent user or project" do
+    it "should render errors when sharing with a nonexistent user or project" do
       user = User.last
       project = Project.last || { id: 1 }
 

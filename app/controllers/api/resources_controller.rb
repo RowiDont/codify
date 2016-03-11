@@ -4,7 +4,12 @@ class Api::ResourcesController < ApplicationController
   end
 
   def show
-    @resource = Resource.includes(:projects, :categories).find(params[:id])
+    @resource = Resource.includes(:projects, :categories).find_by_id(params[:id])
+    if @resource
+      render :show
+    else
+      render json: { errors: ["does not exist"] }, status: 404
+    end
   end
 
   def create

@@ -44,14 +44,18 @@ RSpec.describe Api::CategoriesController, type: :controller do
   end
 
   context "#show" do
-    before(:each) do
+    it "should retrieve resources and projects for the category" do
       id = Category.find_by_name("Redux").id
       get :show, id: id, format: :json
-    end
 
-    it "should retrieve resources and projects for the category" do
       expect(response.body).to have_node(:resources)
       expect(response.body).to have_node(:projects)
+    end
+
+    it "should render an error if id does not exist" do
+      get :show, id: 5, format: :json
+      expect(JSON.parse(response.body)["errors"]).to include("does not exist")
+      expect(response.status).to eq(404)
     end
   end
 
