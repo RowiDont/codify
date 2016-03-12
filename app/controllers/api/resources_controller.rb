@@ -17,10 +17,21 @@ class Api::ResourcesController < ApplicationController
 
     if @resource.save
       if params[:project]
-        ProjectResource.create({
-          resource_id: @resource.id,
-          project_id: params[:project][:id]
-        }) if params[:project][:id]
+        params[:project][:id].each do |id|
+          ProjectResource.create({
+            resource_id: @resource.id,
+            project_id: id
+          })
+        end if params[:project][:id]
+      end
+
+      if params[:category]
+        params[:category][:id].each do |id|
+          CategoryResource.create({
+            resource_id: @resource.id,
+            category_id: id
+          })
+        end if params[:category][:id]
       end
 
       render :show

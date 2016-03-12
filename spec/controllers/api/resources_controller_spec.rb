@@ -63,13 +63,35 @@ RSpec.describe Api::ResourcesController, type: :controller do
       expect(JSON.parse(response.body)["link"]).to eq("google.io")
     end
 
-    it "can create a project-resource tag on creation" do
+    it "can create project-resource tags on creation" do
       user = User.first
-      project1 = Project.create!(title: "a project!", user_id: user.id)
+      p1 = Project.create!(title: "a project!", user_id: user.id)
+      p2 = Project.create!(title: "a second project!", user_id: user.id)
 
-      post :create, resource: { "link" => "google.io" }, project: { id: project1.id }, format: :json
+      post :create,
+           resource: { "link" => "google.io" },
+           project: { id: [p1.id, p2.id] },
+           format: :json
 
-      expect(JSON.parse(response.body)["projects"][0]["id"]).to eq(project1.id)
+      expect(JSON.parse(response.body)["projects"][0]["id"]).to eq(p1.id)
+      expect(JSON.parse(response.body)["projects"][1]["id"]).to eq(p2.id)
+    end
+
+    it "can create category-resource tags on creation" do
+      user = User.first
+      p1 = Project.create!(title: "a project!", user_id: user.id)
+      c1 = Category.create!(name: "graph-ql", user_id: user.id)
+      c2 = Category.create!(name: "relay", user_id: user.id)
+
+      post :create,
+           resource: { "link" => "google.io" },
+           project: { id: [p1.id] },
+           category: { id: [c1.id, c2.id] },
+           format: :json
+
+      expect(JSON.parse(response.body)["projects"][0]["id"]).to eq(p1.id)
+      expect(JSON.parse(response.body)["categories"][0]["id"]).to eq(c1.id)
+      expect(JSON.parse(response.body)["categories"][1]["id"]).to eq(c2.id)
     end
   end
 end
