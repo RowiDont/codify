@@ -1,8 +1,9 @@
 var path = require("path");
+var webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
-  entry: "./frontend/app.jsx",
+  entry: "./frontend/index.jsx",
   output: {
     path: path.join(__dirname, 'app', 'assets', 'javascripts'),
     filename: "bundle.js"
@@ -13,19 +14,22 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
+        test: /.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
         query: {
-          presets: ['react']
+          presets: ['es2015', 'react']
         }
-      },
-      {
-        test: /\.node$/,
-        loader: "node-loader"
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
+  ],
 
   devtool: 'source-map'
 
