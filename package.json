@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "postinstall": "webpack"
+    "postinstall": "webpack",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babel-register --recursive",
+    "test:watch": "npm test -- --watch"
   },
   "keywords": [],
   "author": "",
@@ -31,11 +33,17 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.0.0-beta.5",
+    "babel-register": "^6.7.2",
     "chai": "^3.5.0",
     "eslint": "^2.4.0",
     "eslint-config-airbnb": "^6.1.0",
     "eslint-plugin-react": "^4.2.1",
-    "jsdom": "^8.1.0",
-    "mocha": "^2.4.5"
+    "expect": "^1.16.0",
+    "jsdom": "8.2.0",
+    "jsdom-global": "1.7.0",
+    "karma": "^0.13.22",
+    "karma-nyan-reporter": "^0.2.4",
+    "mocha": "^2.4.5",
+    "xhr2": "^0.1.3"
   }
 }

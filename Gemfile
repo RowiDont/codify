@@ -37,6 +37,7 @@ gem 'pg_search'
 
 
 group :development, :test do
+  gem "nyan-cat-formatter"
   gem 'capybara'
   gem 'rspec-rails'
   gem 'byebug'
