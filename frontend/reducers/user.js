@@ -1,8 +1,4 @@
-import {
-  REQUEST_USER_INDEX,
-  RECEIVE_USER_INDEX,
-  FAILED_USER_FETCH
-} from '../actions/index';
+import * as types from '../constants/index'
 
 let defaultState = {
     loggedIn: false,
@@ -13,16 +9,16 @@ let defaultState = {
 
 export function userIndex(state = defaultState, action) {
   switch (action.type) {
-  case REQUEST_USER_INDEX:
+  case types.REQUEST_USER_INDEX:
     return Object.assign({}, state, {
       isFetching: true
     });
-  case RECEIVE_USER_INDEX:
+  case types.RECEIVE_USER_INDEX:
     return Object.assign({}, state, {
       loggedIn: true,
       isFetching: false
     }, action.user);
-  case FAILED_USER_FETCH:
+  case types.FAILED_USER_FETCH:
     return Object.assign({}, state, {
       loggedIn: false,
       isFetching: false

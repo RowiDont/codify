@@ -1,24 +1,22 @@
 import reqwest from 'reqwest'
-export const REQUEST_USER_INDEX = 'REQUEST_USER_INDEX'
-export const RECEIVE_USER_INDEX = 'RECEIVE_USER_INDEX'
-export const FAILED_USER_FETCH = 'FAILED_USER_FETCH'
+import * as types from '../constants/index'
 
 export const requestUserIndex = () => {
   return {
-    type: REQUEST_USER_INDEX
+    type: types.REQUEST_USER_INDEX
   };
 };
 
 export const receiveUserIndex = (user) => {
   return {
-    type: RECEIVE_USER_INDEX,
+    type: types.RECEIVE_USER_INDEX,
     user
   };
 };
 
 export const failedUserFetch = (errors) => {
   return {
-    type: FAILED_USER_FETCH
+    type: types.FAILED_USER_FETCH
   };
 };
 
